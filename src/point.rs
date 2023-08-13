@@ -14,7 +14,7 @@ where
     }
 
     pub fn get(&self, index: usize) -> T {
-        self.0[index].clone()
+        self.0[index]
     }
 
     pub fn set(&mut self, index: usize, value: T) {
