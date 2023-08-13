@@ -1,4 +1,51 @@
-#![allow(dead_code)]
+use std::ops::*;
+
+pub trait Scalar:
+    PartialEq
+    + PartialOrd
+    + Add<Output = Self>
+    + AddAssign
+    + Sub<Output = Self>
+    + SubAssign
+    + Mul<Output = Self>
+    + MulAssign
+    + Div<Output = Self>
+    + DivAssign
+    + Rem<Output = Self>
+    + RemAssign
+    + Neg<Output = Self>
+    + Copy
+    + Sized
+{
+    fn min_value() -> Self;
+    fn max_value() -> Self;
+    fn zero() -> Self;
+    fn one() -> Self;
+
+    fn abs(&self) -> Self;
+
+    fn min(self, other: Self) -> Self {
+        if self < other {
+            return self;
+        }
+        other
+    }
+    fn max(self, other: Self) -> Self {
+        if self > other {
+            return self;
+        }
+        other
+    }
+    fn clamp(self, min: Self, max: Self) -> Self {
+        if self < min {
+            return min;
+        }
+        if self > max {
+            return max;
+        }
+        self
+    }
+}
 
 // Returns the number of ways to choose r items from n items
 pub fn choose(n: i32, r: i32) -> i32 {

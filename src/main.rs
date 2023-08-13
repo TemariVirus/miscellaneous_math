@@ -1,5 +1,7 @@
 #![allow(dead_code)]
+mod kd_tree;
 mod math_utils;
+mod point;
 
 use math_utils::*;
 
