@@ -2,6 +2,7 @@
 mod kd_tree;
 mod math_utils;
 mod point;
+mod primes;
 
 use math_utils::*;
 
