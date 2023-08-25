@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+mod bracket_dot;
 mod kd_tree;
 mod math_utils;
 mod point;

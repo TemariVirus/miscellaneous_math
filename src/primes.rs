@@ -1,9 +1,9 @@
 pub struct PrimeGenerator {
-    current: i32,
+    current: u32,
 }
 
 impl PrimeGenerator {
-    pub fn new(start: i32) -> PrimeGenerator {
+    pub fn new(start: u32) -> PrimeGenerator {
         let start = start.max(2);
         if start == 2 {
             return PrimeGenerator { current: 0 };
@@ -15,7 +15,7 @@ impl PrimeGenerator {
 }
 
 impl Iterator for PrimeGenerator {
-    type Item = i32;
+    type Item = u32;
 
     fn next(&mut self) -> Option<Self::Item> {
         if self.current == 0 {
@@ -32,7 +32,7 @@ impl Iterator for PrimeGenerator {
     }
 }
 
-pub fn is_prime(n: i32) -> bool {
+pub fn is_prime(n: u32) -> bool {
     if n < 2 {
         return false;
     }
@@ -51,7 +51,7 @@ pub fn is_prime(n: i32) -> bool {
     true
 }
 
-pub fn prime_factorise(n: i32) -> Vec<i32> {
+pub fn prime_factorise(n: u32) -> Vec<u32> {
     let mut result = Vec::new();
     let mut n = n;
     for prime in PrimeGenerator::new(0) {
