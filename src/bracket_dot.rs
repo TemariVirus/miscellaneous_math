@@ -1,4 +1,4 @@
-use crate::primes::PrimeGenerator;
+use crate::primes;
 
 // Inspired by youtu.be/JY0_ApbZYkQ
 pub fn u32_to_bracket_dot(n: u32) -> String {
@@ -8,7 +8,7 @@ pub fn u32_to_bracket_dot(n: u32) -> String {
 
     let mut n = n;
     let mut result = String::from("(");
-    for prime in PrimeGenerator::new(0) {
+    for prime in primes::enum_primes(0) {
         if n == 1 {
             break;
         }
@@ -39,7 +39,7 @@ pub fn bracket_dot_to_u32(s: &str) -> Result<u32, &str> {
 
     let mut result = 1;
     let mut i = 0;
-    for prime in PrimeGenerator::new(0) {
+    for prime in primes::enum_primes(0) {
         if i >= s.len() {
             break;
         }

@@ -2,6 +2,7 @@
 mod bracket_dot;
 mod kd_tree;
 mod math_utils;
+mod multinomial;
 mod point;
 mod primes;
 

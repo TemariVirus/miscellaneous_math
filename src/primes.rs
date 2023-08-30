@@ -2,33 +2,21 @@ pub struct PrimeGenerator {
     current: u32,
 }
 
-impl PrimeGenerator {
-    pub fn new(start: u32) -> PrimeGenerator {
-        let start = start.max(2);
-        if start == 2 {
-            return PrimeGenerator { current: 0 };
-        }
-        // Make start is odd
-        let start = start | 1;
-        PrimeGenerator { current: start - 2 }
-    }
-}
-
 impl Iterator for PrimeGenerator {
     type Item = u32;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.current == 0 {
-            self.current = 1;
-            return Some(2);
-        }
-
+        let result = self.current;
+        self.current -= 1;
+        self.current |= 1;
         loop {
             self.current += 2;
             if is_prime(self.current) {
-                return Some(self.current);
+                break;
             }
         }
+
+        Some(result)
     }
 }
 
@@ -51,11 +39,21 @@ pub fn is_prime(n: u32) -> bool {
     true
 }
 
-pub fn prime_factorise(n: u32) -> Vec<u32> {
+pub fn enum_primes(start: u32) -> PrimeGenerator {
+    let start = start.max(2);
+    if start == 2 {
+        return PrimeGenerator { current: 2 };
+    }
+    // Make start odd
+    let start = start | 1;
+    PrimeGenerator { current: start }
+}
+
+pub fn factorise(n: u32) -> Vec<u32> {
     let mut result = Vec::new();
     let mut n = n;
-    for prime in PrimeGenerator::new(0) {
-        if n == 1 {
+    for prime in enum_primes(0) {
+        if n <= 1 {
             break;
         }
         while n % prime == 0 {
